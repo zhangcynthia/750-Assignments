@@ -1,4 +1,10 @@
-library(S7)
+#' @import S7
+NULL
+
+#' @import readr
+NULL
+
+#library(S7)
 
 DataFrame <- new_class("DataFrame",
                        properties = list(
@@ -99,10 +105,10 @@ method(set_column, DataFrame) <- function(df, name, data) {
   } else if (length(data) != nrow_df) {
     stop("The length of the column doesn't match to the row of dataframe")
   }
-  
+
   new_columns <- df@columns
   new_colnames <- df@colnames
-  
+
   if (name %in% df@colnames) {
     idx <- col_idxs(df, name)
     new_columns[[idx]] <- data
@@ -110,7 +116,7 @@ method(set_column, DataFrame) <- function(df, name, data) {
     new_columns <- c(new_columns, list(data))
     new_colnames <- c(new_colnames, name)
   }
-  
+
   DataFrame(columns = new_columns, colnames = new_colnames)
 }
 
@@ -125,10 +131,10 @@ method(get_value, DataFrame) <- function(df, col, row) {
 set_value <- new_generic("set_value", "df")
 method(set_value, DataFrame) <- function(df, col, row, value) {
   idx <- if (is.character(col)) {col_idxs(df, col)} else {col}
-  
+
   new_columns <- df@columns
   new_columns[[idx]][row] <- value
-  
+
   DataFrame(columns = new_columns, colnames = df@colnames)
 }
 
@@ -176,7 +182,7 @@ method(slice_rows, DataFrame) <- function(df, start, end) {
 #   columns = list(c(1, 2, 3), c("a", "b", "c")),
 #   colnames = c("id", "name")
 # )
-# 
+#
 # get_column(df, "name")             # c("a", "b", "c")
 # get_value(df, "id", 2)             # 2
 # set_value(df, "id", 2, 99)@columns[[1]]   # c(1, 99, 3)
@@ -184,10 +190,10 @@ method(slice_rows, DataFrame) <- function(df, start, end) {
 # delete_column(df, "name")@colnames        # "id"
 # slice_rows(df, 2, 3)@columns[[1]]         # c(2, 3)
 # set_column(df, "score", c(10,20,30))@colnames  # c("id","name","score")
-# 
+#
 # df@columns[[1]]
 
-library(readr)
+# library(readr)
 read_dataframe_csv <- function(filepath, skip = 0, header = TRUE){
   raw <- readr::read_csv(
     filepath,
@@ -195,7 +201,7 @@ read_dataframe_csv <- function(filepath, skip = 0, header = TRUE){
     col_names = header,
     col_types = readr::cols(.default = readr::col_character())
   )
-  
+
   col_names <- colnames(raw)
   new_cols <- lapply(raw, function(col){parse_column(col)})
   DataFrame(columns = new_cols, colnames = col_names)
