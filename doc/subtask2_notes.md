@@ -5,6 +5,7 @@ output: html_document
 
 ## Dataframe Design
 `DataFrame` is implemented as a class (`R/dataframe.R`) with two properties:
+
 - `columns`: a list of vectors holding the actual data
 - `colnames`: a character vector giving the name of each column
 
@@ -22,8 +23,8 @@ Tests are in `tests/testthat/test-dataframe.R`, with a small DataFrame (`id`, `n
 
 I applied at least one test for each core function: dataframe construction, `dims`, `df_colnames`, `col_idxs`, `col_name`, `fill_col`, `validate`, `get_column`, `set_column`, `get_value`, `set_value`, `rename_column`, `change_column_type`, `delete_column`, `slice_rows`, `guess_type`, `parse_column`, and `read_dataframe_csv`. 
 
-Error cases are tested for `col_idxs` and `validate`.
+Error cases are tested for `col_idxs` (invalid column name) and `validate` (mismatched column lengths).
 
-Immutability is checked for `set_column` and `set_value`. 
+Immutability is checked for `set_column` and `set_value`, confirming that the original dataframe is not changed after modification.
 
 All tests pass using `devtools::test()`.
