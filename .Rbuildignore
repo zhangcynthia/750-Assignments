@@ -1,2 +1,4 @@
 ^streams\.Rproj$
 ^\.Rproj\.user$
+^exercises$
+^docs$

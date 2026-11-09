@@ -9,10 +9,12 @@ License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Suggests: 
+    callr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
     rlang,
     S7,
+    stats,
     waldo
 Config/roxygen2/version: 8.1.0

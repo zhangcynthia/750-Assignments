@@ -1,6 +1,6 @@
 #' @importFrom rlang enquo env_parent
 #' @importFrom utils head tail str
-#' @importFrom S7 new_class class_any method method<- methods_register S7_inherits
+#' @importFrom S7 new_class class_any class_function method method<- methods_register S7_inherits
 NULL
 
 #' @export
